@@ -50,13 +50,13 @@ oci network security-list update --security-list-id $sl_id --egress-security-rul
 
 echo "Config file:"
 cat <<EOF > $config_file
-export cidr_block=$cidr_block
-export subnet_block=$subnet_block
-export vcn_name=$vcn_name
-export subnet_name=$subnet_name
-export compartment_id=$compartment_id
+# Stage 1
 export vcn_id=$vcn_id
 export vcn_name=$vcn_name
+export compartment_id=$compartment_id
+export subnet_name=$subnet_name
+export cidr_block=$cidr_block
+export subnet_block=$subnet_block
 export rt_id=$rt_id
 export ig_id=$ig_id
 export sl_id=$sl_id

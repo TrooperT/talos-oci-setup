@@ -68,6 +68,7 @@ export network_load_balancer_ip=$(oci nlb network-load-balancer list --compartme
 
 echo "Config file:"
 cat <<EOF > $config_file
+# Stage 1
 export vcn_id=$vcn_id
 export vcn_name=$vcn_name
 export compartment_id=$compartment_id
@@ -77,6 +78,7 @@ export subnet_block=$subnet_block
 export rt_id=$rt_id
 export ig_id=$ig_id
 export sl_id=$sl_id
+# Stage 2
 export network_load_balancer_id=$network_load_balancer_id
 export network_load_balancer_ip=$network_load_balancer_ip
 EOF
