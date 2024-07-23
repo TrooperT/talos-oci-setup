@@ -64,4 +64,21 @@ echo "Creating NLB Listener for Kubernetes API"
 oci nlb listener create --default-backend-set-name controlplane --name controlplane --network-load-balancer-id $network_load_balancer_id --port 6443 --protocol TCP
 
 # Save the external IP
-oci nlb network-load-balancer list --compartment-id $compartment_id --display-name controlplane-lb --query 'data.items[0]."ip-addresses"'
+export network_load_balancer_ip=$(oci nlb network-load-balancer list --compartment-id $compartment_id --display-name controlplane-lb --query 'data.items[0]."ip-addresses"')
+
+echo "Config file:"
+cat <<EOF > $config_file
+export vcn_id=$vcn_id
+export vcn_name=$vcn_name
+export compartment_id=$compartment_id
+export subnet_name=$subnet_name
+export cidr_block=$cidr_block
+export subnet_block=$subnet_block
+export rt_id=$rt_id
+export ig_id=$ig_id
+export sl_id=$sl_id
+export network_load_balancer_id=$network_load_balancer_id
+export network_load_balancer_ip=$network_load_balancer_ip
+EOF
+
+cat $config_file
